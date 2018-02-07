@@ -309,7 +309,7 @@ class TxAccountCreate(Base, TxBase):
     active_key = Column(Unicode(80), nullable=False)
     posting_key = Column(Unicode(80), nullable=False)
     memo_key = Column(Unicode(250), nullable=False)
-    json_metadata = Column(UnicodeText)
+    json_metadata = Column(UnicodeText(1073741824))
 
     _fields = dict(account_create=dict(
         creator=lambda x: x.get('creator'),
@@ -344,7 +344,7 @@ class TxAccountCreateWithDelegation(Base, TxBase):
     active_key = Column(Unicode(80), nullable=False)
     posting_key = Column(Unicode(80), nullable=False)
     memo_key = Column(Unicode(250), nullable=False)
-    json_metadata = Column(UnicodeText)
+    json_metadata = Column(UnicodeText(1073741824))
 
     _fields = dict(account_create_with_delegation=dict(
         fee=lambda x: amount_field(x.get('fee'), num_func=float),
@@ -515,7 +515,7 @@ class TxAccountUpdate(Base, TxBase):
     key_auth1 = Column(Unicode(80))
     key_auth2 = Column(Unicode(80))
     memo_key = Column(Unicode(250))
-    json_metadata = Column(UnicodeText)
+    json_metadata = Column(UnicodeText(1073741824))
 
     _fields = dict(account_update=dict(
         account=lambda x: x.get('account'),
@@ -761,8 +761,8 @@ class TxComment(Base, TxBase):
     parent_author = Column(Unicode(50), index=True)
     parent_permlink = Column(Unicode(512))
     title = Column(Unicode(512))
-    body = Column(UnicodeText)
-    json_metadata = Column(UnicodeText)
+    body = Column(UnicodeText(1073741824))
+    json_metadata = Column(UnicodeText(1073741824))
 
     _fields = dict(comment=dict(
         author=lambda x: x.get('author'),
@@ -960,7 +960,7 @@ class TxCustom(Base, TxBase):
 
     tid = Column(Unicode(50), nullable=False)
     required_auths = Column(Unicode(250))
-    data = Column(UnicodeText)
+    data = Column(UnicodeText(1073741824))
 
     common = dict(
         tid=lambda x: x.get('id'),
@@ -1010,7 +1010,7 @@ class TxCustomJSON(Base, TxBase):
     tid = Column(Unicode(50), nullable=False, index=True)
     required_auths = Column(Unicode(250))
     required_posting_auths = Column(Unicode(250))
-    json = Column(UnicodeText)
+    json = Column(UnicodeText(1073741824))
 
     common = dict(
         tid=lambda x: x.get('id'),
@@ -1271,7 +1271,7 @@ class TxEscrowTransfer(Base, TxBase):
     steem_amount = Column(Numeric(15, 6))
     sbd_amount = Column(Numeric(15, 6))
 
-    json_metadata = Column(UnicodeText)
+    json_metadata = Column(UnicodeText(1073741824))
     fee_amount = Column(Numeric(15, 6))
     fee_amount_symbol = Column(Unicode(5))
     escrow_expiration = Column(DateTime(timezone=False), index=True)
